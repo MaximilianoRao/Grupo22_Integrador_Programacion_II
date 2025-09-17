@@ -8,6 +8,7 @@
 -fechaRegistro: LocalDateTime
 -credencial: CredencialAcceso
 --
++Usuario()
 +Usuario(String, String)
 
 </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>680</x><y>200</y><w>210</w><h>190</h></coordinates><panel_attributes>CredencialAcceso
@@ -19,6 +20,7 @@
 -ultimoCambio: LocalDateTime
 -requiereReset: Boolean
 --
++CredencialAcceso()
 +CredencialAcceso(String, String)
 
 </panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>480</x><y>300</y><w>220</w><h>40</h></coordinates><panel_attributes>lt=&lt;-
