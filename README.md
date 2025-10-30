@@ -4,7 +4,7 @@
 Integrantes:
 -  Barandiarán, Francisco 
 -  De Inocenti, Alfredo
--  Olivera Favio
--  Rao Maximiliano
+-  Olivera, Favio
+-  Rao, Maximiliano
 
 
