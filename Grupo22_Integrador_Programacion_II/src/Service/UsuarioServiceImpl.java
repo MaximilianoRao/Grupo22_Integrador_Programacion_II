@@ -22,10 +22,9 @@ import java.util.List;
  *     Orquestar la transacción para crear/actualizar usuario.
  *     Llamar al {@link UsuarioDAO} pasándole SIEMPRE la misma conexión para
  *     que se pueda manejar la relación 1→1 con {@code CredencialAcceso} en la
- *     misma transacción. :contentReference[oaicite:6]{index=6}
->
+ *     misma transacción.
  *
- * Implementa {@link GenericService} porque así lo pide la consigna del TFI. :contentReference[oaicite:7]{index=7}
+ * Implementa {@link GenericService} porque así lo pide la consigna del TFI.
  */
 public class UsuarioServiceImpl extends AbstractService implements GenericService<Usuario, Long>{
     private final UsuarioDAO usuarioDAO;

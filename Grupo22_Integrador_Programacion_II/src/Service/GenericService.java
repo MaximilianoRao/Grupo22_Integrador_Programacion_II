@@ -22,7 +22,7 @@ import java.util.List;
  * @param <ID> tipo del identificador (por ej. {@code Long})
  *
  * Basado en la consigna del TFI: “GenericService: insertar, actualizar,
- * eliminar, getById, getAll”. :contentReference[oaicite:3]{index=3}
+ * eliminar, getById, getAll”.
  */
 public interface GenericService<T, ID> {
     

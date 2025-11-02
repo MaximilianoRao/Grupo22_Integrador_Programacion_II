@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  *
  * Según la consigna del TFI, esta es la clase **A** de la relación 1→1
  * (Usuario → CredencialAcceso). Es decir: el usuario tiene una sola
- * credencial asociada. :contentReference[oaicite:2]{index=2}
+ * credencial asociada.
  * * Hereda de {@link Base} para tener:
  *     {@code id} (Long)
  *     {@code eliminado} (baja lógica)
@@ -44,7 +44,7 @@ public class Usuario extends Base{
      * Se usa cuando vamos a crear un usuario nuevo desde la app.
      */
     public Usuario() {
-        super(); // eliminado = false (viene de Base) :contentReference[oaicite:3]{index=3}
+        super(); // eliminado = false (viene de Base)
         this.activo = true; // por defecto lo dejamos activo
     }
     
@@ -52,7 +52,7 @@ public class Usuario extends Base{
      * Constructor completo, útil para reconstruir desde la BD.
      */
     public Usuario(Long id, boolean eliminado,String username,String email,boolean activo,LocalDateTime fechaRegistro,CredencialAcceso credencial) {
-        super(id, eliminado); // setea id y eliminado de la clase base :contentReference[oaicite:4]{index=4}
+        super(id, eliminado); // setea id y eliminado de la clase base
         this.username = username;
         this.email = email;
         this.activo = activo;
@@ -111,7 +111,7 @@ public class Usuario extends Base{
     @Override
     public String toString() {
         return "Usuario{" +
-                "id=" + getId() +       // viene de Base → ya existe getId() :contentReference[oaicite:5]{index=5}
+                "id=" + getId() +       // viene de Base → ya existe getId()
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", activo=" + activo +

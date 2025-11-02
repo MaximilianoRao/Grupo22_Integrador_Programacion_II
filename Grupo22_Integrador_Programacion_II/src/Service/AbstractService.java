@@ -23,12 +23,10 @@ import java.sql.SQLException;
  *     Restaurar el auto-commit y cerrar la conexión.
  *     Validaciones comunes (no nulo, no vacío, email válido).
  * 
- *
- * 
  * La consigna del TFI dice que la capa Service debe “Abrir transacción:
  * setAutoCommit(false) … commit() si todo OK; rollback() ante cualquier error;
  * Restablecer autoCommit(true) y cerrar recursos.”, así que este es el lugar
- * donde lo hacemos una sola vez. :contentReference[oaicite:4]{index=4}
+ * donde lo hacemos una sola vez.
  * 
  */
 public abstract class AbstractService {

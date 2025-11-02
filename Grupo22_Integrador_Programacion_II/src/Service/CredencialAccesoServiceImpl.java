@@ -23,7 +23,7 @@ import java.util.List;
  *     que el {@code hashPassword} no venga vacío;
  *     que se registre la fecha de último cambio;
  *     que el flag {@code requiereReset} tenga un valor;
- *     y que TODO eso se haga dentro de una transacción, tal como pide el TFI. :contentReference[oaicite:8]{index=8}
+ *     y que TODO eso se haga dentro de una transacción, tal como pide el TFI.
  */
 
 public class CredencialAccesoServiceImpl extends AbstractService implements GenericService<CredencialAcceso, Long>{
