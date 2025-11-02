@@ -113,13 +113,36 @@ public class CredencialAcceso extends Base {
         this.requiereReset = requiereReset;
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-         
+        /**
+     * Devuelve el hash de la contraseña almacenada.
+     * @return hashPassword (nunca debería ser null en BD)
+     */
+    public String getHashPassword() {
+        return hashPassword;
+    }
+
+    /**
+     * Establece el hash de la contraseña.
+     * @param hashPassword valor ya encriptado (hash)
+     */
+    public void setHashPassword(String hashPassword) {
+        this.hashPassword = hashPassword;
+    }
+
+    /**
+     * Devuelve el salt usado para el hash.
+     * @return salt
+     */
+    public String getSalt() {
+        return salt;
+    }
+
+    /**
+     * Establece el salt usado para el hash.
+     * @param salt valor de salt
+     */
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+        
 }
