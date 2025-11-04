@@ -24,7 +24,7 @@ import java.util.List;
  * Basado en la consigna del TFI: “GenericService: insertar, actualizar,
  * eliminar, getById, getAll”.
  */
-public interface GenericService<T, ID> {
+public interface GenericService<T> {
     
     /**
      * Inserta una nueva entidad en el sistema.
@@ -42,7 +42,7 @@ public interface GenericService<T, ID> {
      * @return entidad encontrada o {@code null} si no existe
      * @throws Exception si ocurre un error al acceder a la base
      */
-    T obtenerPorId(ID id) throws Exception;
+    T obtenerPorId(Long id) throws Exception;
     
     /**
      * Lista todas las entidades disponibles.
@@ -67,5 +67,5 @@ public interface GenericService<T, ID> {
      * @param id identificador de la entidad
      * @throws Exception si no se puede eliminar
      */
-    void eliminar(ID id) throws Exception;
+    void eliminar(Long id) throws Exception;
 }

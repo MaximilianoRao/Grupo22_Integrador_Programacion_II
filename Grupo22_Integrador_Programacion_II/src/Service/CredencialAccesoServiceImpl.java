@@ -26,7 +26,7 @@ import java.util.List;
  *     y que TODO eso se haga dentro de una transacción, tal como pide el TFI.
  */
 
-public class CredencialAccesoServiceImpl extends AbstractService implements GenericService<CredencialAcceso, Long>{
+public class CredencialAccesoServiceImpl extends AbstractService implements GenericService<CredencialAcceso>{
     
     private final CredencialAccesoDAO credencialDAO;
 

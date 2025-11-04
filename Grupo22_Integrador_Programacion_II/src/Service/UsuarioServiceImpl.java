@@ -26,7 +26,7 @@ import java.util.List;
  *
  * Implementa {@link GenericService} porque así lo pide la consigna del TFI.
  */
-public class UsuarioServiceImpl extends AbstractService implements GenericService<Usuario, Long>{
+public class UsuarioServiceImpl extends AbstractService implements GenericService<Usuario>{
     private final UsuarioDAO usuarioDAO;
     
     /**
