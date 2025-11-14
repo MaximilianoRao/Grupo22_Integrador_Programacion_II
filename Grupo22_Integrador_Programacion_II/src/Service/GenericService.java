@@ -33,7 +33,7 @@ public interface GenericService<T> {
      * @return entidad insertada (con ID si lo genera la BD)
      * @throws Exception si hay errores de validación o de acceso a datos
      */
-    T insertar(T entity) throws Exception;
+    void insertar(T entity) throws Exception;
     
     /**
      * Obtiene una entidad por su identificador único.

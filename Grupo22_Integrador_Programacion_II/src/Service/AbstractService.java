@@ -99,46 +99,10 @@ public abstract class AbstractService {
         }
     }
     
-    // ==========================================================
-    // ============== VALIDACIONES COMUNES ======================
-    // ==========================================================
-
-    /**
-     * Valida que un string no sea nulo ni vacío.
-     *
-     * @param value     valor a validar
-     * @param fieldName nombre del campo (para el mensaje de error)
-     * @throws IllegalArgumentException si el string está vacío
-     */
-    protected void validateNotEmpty(String value, String fieldName) {
-        if (value == null || value.trim().isEmpty()) {
-            throw new IllegalArgumentException(fieldName + " no puede estar vacío");
-        }
+    protected boolean validateEmail(String email) {
+        String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+        return email.matches(regex);
     }
+        
     
-    /**
-     * Valida que un objeto no sea nulo.
-     *
-     * @param obj       objeto a validar
-     * @param fieldName nombre del campo (para el mensaje de error)
-     * @throws IllegalArgumentException si el objeto es nulo
-     */
-    protected void validateNotNull(Object obj, String fieldName) {
-        if (obj == null) {
-            throw new IllegalArgumentException(fieldName + " no puede ser nulo");
-        }
-    }
-    
-    /**
-     * Valida el formato básico de un email.
-     *
-     * @param email email a validar
-     * @throws IllegalArgumentException si el email es nulo o no coincide con el patrón
-     */
-    protected void validateEmail(String email) {
-        if (email == null
-                || !email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")) {
-            throw new IllegalArgumentException("Email inválido: " + email);
-        }
-    }
 }
