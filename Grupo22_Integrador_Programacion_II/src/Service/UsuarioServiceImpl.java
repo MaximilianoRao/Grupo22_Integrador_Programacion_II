@@ -53,32 +53,68 @@ public class UsuarioServiceImpl extends AbstractService implements GenericServic
     }
     
     @Override
-    public void insertar(Usuario usuario) throws Exception {
+    public Usuario insertar(Usuario entidad) throws Exception {
+        throw new UnsupportedOperationException(
+            "Use crearUsuarioConCredencial() para crear usuarios. " +
+            "Un usuario siempre debe tener una credencial asociada."
+        );
+    }
+    
+    /**
+     * Crea un usuario nuevo junto con su credencial.
+     * Operación transaccional que garantiza la creación de ambos o ninguno.
+     *
+     * @param usuario datos del usuario (sin ID)
+     * @param credencial datos de la credencial (sin ID)
+     * @return usuario creado con ID asignado y credencial asociada
+     * @throws Exception si hay error de validación o BD
+     */
+    public Usuario crearUsuarioConCredencial(Usuario usuario, CredencialAcceso credencial) throws Exception {
         Connection conn = null;
         try {
             conn = getConnection();
             beginTransaction(conn);
-            validarUsuario(usuario);
-            if (usuarioDAO.existeUsername(usuario.getUsername(), conn)) {
-                throw new IllegalArgumentException("El username ya existe: " + usuario.getUsername());
-            }
-            if (usuarioDAO.existeEmail(usuario.getEmail(), conn)) {
-                throw new IllegalArgumentException("El email ya existe: " + usuario.getEmail());
-            }
-            if (usuario.getFechaRegistro() == null) {
-                usuario.setFechaRegistro(LocalDateTime.now());
-            }
-            usuarioDAO.crear(usuario, conn);
-            
-            
-            commitTransaction(conn);
-        }catch (Exception e) {
-            rollbackTransaction(conn);
-            throw new Exception("Error al crear usuario con credencial: " + e.getMessage(), e);
-        } finally {
-            closeConnection(conn);
+            // 2. Validaciones
+        validarUsuario(usuario);
+        validarCredencial(credencial);
+        
+        if (usuarioDAO.existeUsername(usuario.getUsername(), conn)) {
+            throw new IllegalArgumentException("El username ya existe: " + usuario.getUsername());
         }
-
+        if (usuarioDAO.existeEmail(usuario.getEmail(), conn)) {
+            throw new IllegalArgumentException("El email ya existe: " + usuario.getEmail());
+        }
+        
+        // 3. Inicializar fechas
+        if (usuario.getFechaRegistro() == null) {
+            usuario.setFechaRegistro(LocalDateTime.now());
+        }
+        if (credencial.getUltimoCambio() == null) {
+            credencial.setUltimoCambio(LocalDateTime.now());
+        }
+        
+        // 4. SECUENCIA TRANSACCIONAL (en la MISMA conexión):
+        // a) Crear credencial primero
+        credencial = credencialAccesoDAO.crear(credencial, conn);
+        
+        // b) Asignar credencial al usuario (ahora tiene ID)
+        usuario.setCredencial(credencial);
+        
+        // c) Crear usuario
+        usuario = usuarioDAO.crear(usuario, conn);
+        
+        // 5. Commit de TODO junto
+        commitTransaction(conn);
+        
+        return usuario;
+        } catch (Exception e) {
+        // 6. Rollback de TODO si algo falla
+        rollbackTransaction(conn);
+        throw new Exception("Error al crear usuario con credencial: " + e.getMessage(), e);
+        } finally {
+        closeConnection(conn);
+        }
+        
     }
         
     
@@ -347,7 +383,6 @@ public class UsuarioServiceImpl extends AbstractService implements GenericServic
         }
     }
     
-    
-    
+  
     
 }

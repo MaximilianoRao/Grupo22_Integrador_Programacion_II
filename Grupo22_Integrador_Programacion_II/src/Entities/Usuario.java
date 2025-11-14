@@ -193,6 +193,6 @@ public class Usuario extends Base {
      */
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + getId() +", username='" + username + '\'' +", email='" + email + '\'' +", activo=" + activo +", fechaRegistro=" + fechaRegistro +", tieneCredencial=" + (credencial != null) +", credencialId=" + (credencial != null ? credencial.getId() : "null") +", eliminado=" + isEliminado() + "}";
+        return "Usuario{" + "id=" + getId() +", username='" + username + '\'' +", email='" + email + '\'' +", activo=" + activo +", fechaRegistro=" + fechaRegistro +",\n tieneCredencial=" + (credencial != null) +", credencialId=" + (credencial != null ? credencial.getId() : "null") +", eliminado=" + isEliminado() + "}";
     }
 }

@@ -65,14 +65,14 @@ public class CredencialAccesoDAO implements GenericDAO<CredencialAcceso>{
      * Solo retorna credenciales activas (eliminado=FALSE).
      * 
      */
-    private static final String SELECT_BY_ID_SQL = "SELECT id, eliminado, ultimoCambio, requiereReset FROM credencialacceso WHERE id = ? AND eliminado = FALSE";
+    private static final String SELECT_BY_ID_SQL = "SELECT id, eliminado, hashPassword, salt, ultimoCambio, requiereReset FROM credencialacceso WHERE id = ? AND eliminado = FALSE";
 
     /**
      * Query para obtener todos las credenciales activas.
      * Solo retorna credenciales activas (eliminado=FALSE).
      * 
      */
-    private static final String SELECT_ALL_SQL = "SELECT id, eliminado, ultimoCambio, requiereReset FROM credencialacceso WHERE eliminado = FALSE";
+    private static final String SELECT_ALL_SQL = "SELECT id, eliminado, hashPassword, salt, ultimoCambio, requiereReset FROM credencialacceso WHERE eliminado = FALSE";
     
     /**
      * Query busqueda exacta de una credencial y cuenta las ocurrencias.
@@ -90,12 +90,14 @@ public class CredencialAccesoDAO implements GenericDAO<CredencialAcceso>{
      * @throws Exception Si falla la inserción
      */
     @Override
-    public void crear(CredencialAcceso credencial, Connection conn) throws Exception {
+    public CredencialAcceso crear(CredencialAcceso credencial, Connection conn) throws Exception {
         try (PreparedStatement stmt = conn.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
             setCredencialParameters(stmt, credencial);
             stmt.executeUpdate();
             setGeneratedId(stmt, credencial);
         }
+        
+        return credencial;
     }
     
     /**
@@ -113,13 +115,12 @@ public class CredencialAccesoDAO implements GenericDAO<CredencialAcceso>{
     @Override
     public void actualizar(CredencialAcceso credencial, Connection conn) throws Exception {
         try (PreparedStatement stmt = conn.prepareStatement(UPDATE_SQL)) {
-
+        
             stmt.setString(1, credencial.getHashPassword());
             stmt.setString(2, credencial.getSalt());
             stmt.setTimestamp(3, Timestamp.valueOf(credencial.getUltimoCambio()));
             stmt.setBoolean(4, credencial.isRequiereReset());
-            stmt.setBoolean(5, credencial.isEliminado());
-            stmt.setLong(6, credencial.getId());
+            stmt.setLong(5, credencial.getId());
 
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected == 0) {

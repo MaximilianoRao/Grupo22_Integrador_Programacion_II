@@ -35,7 +35,7 @@ public class CredencialAccesoServiceImpl extends AbstractService implements Gene
     }
     
     @Override
-    public void insertar(CredencialAcceso cred) throws Exception {
+    public CredencialAcceso insertar(CredencialAcceso cred) throws Exception {
         Connection conn = null;
         try {
             conn = getConnection();
@@ -46,11 +46,11 @@ public class CredencialAccesoServiceImpl extends AbstractService implements Gene
                 cred.setUltimoCambio(LocalDateTime.now());
             }
 
-            credencialDAO.crear(cred, conn);
+            cred = credencialDAO.crear(cred, conn);
             
 
             commitTransaction(conn);
-         
+            return cred;
         } catch (Exception e) {
             rollbackTransaction(conn);
             throw new Exception("Error al insertar credencial: " + e.getMessage(), e);
@@ -198,39 +198,5 @@ public class CredencialAccesoServiceImpl extends AbstractService implements Gene
         }
     }
     
-    /**
-     * Valida los datos de una credencial.
-     *
-     * @param credencial Credencial a validar
-     * @throws IllegalArgumentException si algún dato es inválido
-     */
-    private void validarCredencial(CredencialAcceso credencial) {
-        if (credencial == null) {
-            throw new IllegalArgumentException("La credencial no puede ser null");
-        }
-        
-        // Validar hashPassword
-        if (credencial.getHashPassword() == null || credencial.getHashPassword().trim().isEmpty()) {
-            throw new IllegalArgumentException("El hash de la contraseña no puede estar vacío");
-        }
-        if (credencial.getHashPassword().length() > 255) {
-            throw new IllegalArgumentException("El hash no puede tener más de 255 caracteres");
-        }
-        
-        // Validar salt
-        if (credencial.getSalt() == null || credencial.getSalt().trim().isEmpty()) {
-            throw new IllegalArgumentException("El salt no puede estar vacío");
-        }
-        if (credencial.getSalt().length() > 64) {
-            throw new IllegalArgumentException("El salt no puede tener más de 64 caracteres");
-        }
-        
-        // Validar ultimoCambio
-        if (credencial.getUltimoCambio() != null) {
-        // Validar que la fecha no sea futura
-        if (credencial.getUltimoCambio().isAfter(LocalDateTime.now())) {
-            throw new IllegalArgumentException("La fecha de último cambio no puede ser futura");
-        }
-        }
-    }
+    
 }

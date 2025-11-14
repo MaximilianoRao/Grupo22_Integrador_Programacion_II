@@ -12,7 +12,7 @@ import java.util.List;
  * @param <T>
  */
 public interface GenericDAO<T> {
-    void crear(T entidad, Connection conn) throws Exception;
+    T crear(T entidad, Connection conn) throws Exception;
     void actualizar(T entidad, Connection conn) throws Exception;
     void eliminar(Long id, Connection conn) throws Exception;
     T leer(Long id, Connection conn) throws Exception;

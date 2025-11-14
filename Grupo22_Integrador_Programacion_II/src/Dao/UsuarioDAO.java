@@ -128,7 +128,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
      */
 
     @Override
-    public void crear(Usuario usuario, Connection conn) throws Exception {
+    public Usuario crear(Usuario usuario, Connection conn) throws Exception {
          try (PreparedStatement stmt = conn.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, usuario.getUsername());
@@ -153,6 +153,8 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
                 }
             }
         }
+        
+        return usuario;
     }
 
      /**
