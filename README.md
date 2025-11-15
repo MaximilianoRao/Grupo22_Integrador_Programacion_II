@@ -43,8 +43,6 @@ Usuarios(id PK, username UNIQUE, email UNIQUE, activo, fechaRegistro, credencial
 - **Elegido:** `eliminado=TRUE`en Usuario y Credencial (preserva histórico, permite auditoría, evita cascadas destructivas).<br>
 - **Base común:** clase `Base { id, eliminado }`.
 
-### 2.3 Diagrama UML del Modelo
-![Usuario-CredencialAcceso](Usuario-CredencialAcceso.png)
 
 ### 2.4 Validaciones de datos (resumen)
 - `username`: único, ≤30, alfanumérico/_
