@@ -18,6 +18,7 @@ Este Trabajo Práctico Integrador tiene como objetivo demostrar la aplicación p
 
 ## 1. Dominio y justificación
 **Dominio:** Gestión de usuarios y credenciales (base de cualquier login/registro).
+
 **Motivos:**
 - Relevancia práctica (web, mobile, empresariales).
 - Complejidad didáctica adecuada: relación 1→1, soft delete, transacciones, validaciones (unicidad).
