@@ -43,16 +43,16 @@ Usuarios(id PK, username UNIQUE, email UNIQUE, activo, fechaRegistro, credencial
 - **Elegido:** `eliminado=TRUE`en Usuario y Credencial (preserva histórico, permite auditoría, evita cascadas destructivas).<br>
 - **Base común:** clase `Base { id, eliminado }`.
 
-
-### 2.4 Validaciones de datos (resumen)
+### 2.3 Validaciones de datos (resumen)
 - `username`: único, ≤30, alfanumérico/_
 - `email`: único, ≤120, formato válido
 - `hashPassword`: ≤255
 - `salt`: ≤64
 - Regla 1→1 obligatoria (usuario siempre con credencial válida).
 
-### 2.5 Orden de Operaciones Crítico
+### 2.4 Orden de Operaciones Crítico
 **Crear usuario**: (1) crear credencial → (2) asignar FK → (3) crear usuario → (4) commit.
+
 **Eliminar usuario**: marcar eliminado en Usuario y en su Credencial (misma transacción).
 
 ## 3. Arquitectura del Sistema
