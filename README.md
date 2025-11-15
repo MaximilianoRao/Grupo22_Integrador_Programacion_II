@@ -233,6 +233,8 @@ herramienta de asistencia para:
 
 ## 11. Enlace video explicativo
 
+https://www.youtube.com/watch?v=fz9zXKPfM2k
+
 
 ---
 
